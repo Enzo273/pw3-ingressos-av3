@@ -1,5 +1,6 @@
 package br.com.etechoracio.ingresso.controller;
 
+import br.com.etechoracio.ingresso.dto.SalaRequestDTO;
 import br.com.etechoracio.ingresso.dto.SalaResponseDTO;
 import br.com.etechoracio.ingresso.service.SalaService;
 import org.springframework.http.HttpStatus;
@@ -15,12 +16,12 @@ public class SalaController {
 
     private final SalaService salaService;
 
-    public SalaController(SalaService salaService){
+    public SalaController(SalaService salaService) {
         this.salaService = salaService;
     }
 
     @GetMapping
-    public List<SalaResponseDTO> listarSalasAtivas(){
+    public List<SalaResponseDTO> listarSalasAtivas() {
         return salaService.listarSalasAtivas();
     }
 
@@ -31,4 +32,10 @@ public class SalaController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    @PostMapping
+    public ResponseEntity<SalaResponseDTO> cadastrar(@RequestBody SalaRequestDTO requestDTO) {
+        SalaResponseDTO salaCriada = salaService.cadastrarSala(requestDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(salaCriada);
+
+    }
 }
