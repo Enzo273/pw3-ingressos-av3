@@ -24,6 +24,11 @@ public class SalaController {
         return salaService.listarSalasAtivas();
     }
 
-
+    @GetMapping("/{id}")
+    public ResponseEntity<SalaResponseDTO> buscarPorId(@PathVariable Long id) {
+        return salaService.buscarSalaAtivaPorId(id)
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
 
 }

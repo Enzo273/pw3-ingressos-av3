@@ -10,4 +10,5 @@ import java.util.List;
 public interface SalaMapper {
     List<SalaResponseDTO> toResponseDTOList(List<Sala> salas);
 
+    SalaResponseDTO toResponseDTO(Sala sala);
 }
